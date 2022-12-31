@@ -7,7 +7,6 @@
                 <base-bagde v-for="area in coach.areas" :key="area" :type="area" :title="area"></base-bagde>
             </div>
             <div class="actions">
-
                 <base-button :link="true" :to="coachContactLink" mode="outline">Contact</base-button>
                 <base-button :link="true" :to="coachDetailsLink">View Details</base-button>
             </div>

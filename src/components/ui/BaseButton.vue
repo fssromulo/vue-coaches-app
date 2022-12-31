@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <button v-if="!link" :class="mode">
+    <span>
+        <button v-if="!link" :class="mode" :type="type">
             <slot></slot>
         </button>
         <router-link v-else :to="to" :class="mode">
             <slot></slot>
         </router-link>
-    </div>
+    </span>
 </template>
 
 <script>
@@ -26,7 +26,12 @@ export default {
             type: String,
             required: false,
             default: null
-        }
+        },
+        type: {
+            type: String,
+            required: false,
+            default: 'submit'
+        },
     }
 }
 </script>

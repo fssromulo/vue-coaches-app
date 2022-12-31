@@ -8,15 +8,18 @@
             <section>
                 <div class="controls">
                     <base-button @click="loadCoaches(true)">Refresh</base-button>
-                    <base-button v-if="!isCoach && !isLoading" :link="true" to="/register" mode="outline">Register as
-                        Coach</base-button>
+                    <base-button mode="flat" link to="/auth?redirect=register" v-if="!isLoggedIn">
+                        Login to Register as a Coach
+                    </base-button>
+                    <base-button v-if="isLoggedIn && !isCoach && !isLoading" :link="true" to="/register" mode="outline">
+                        Register as Coach
+                    </base-button>
 
                 </div>
 
                 <base-spinner v-if="isLoading"></base-spinner>
                 <ul v-else-if="hasCoaches">
                     <CoachItem v-for="coach in filteredCoaches" :key="coach.id" :coach="coach" />
-
                 </ul>
                 <h3 v-else> No coaches to show...</h3>
             </section>
@@ -46,6 +49,9 @@ export default {
         }
     },
     computed: {
+        isLoggedIn() {
+            return this.$store.getters.isAuthenticated;
+        },
         isCoach() {
             return this.$store.getters['coaches/isCoach'];
         },
